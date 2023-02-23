@@ -10,8 +10,8 @@
 	let shots: Shot[] = []
 	let enemies: Enemy[] = []
 
-	function move(event: MouseEvent) {
-		ship.x = event.pageX - Ship.WIDTH / 2
+	function move(event: PointerEvent) {
+		ship.x = Math.min(event.pageX - Ship.WIDTH / 2, width - Ship.WIDTH)
 		// ship.y = event.offsetY
 	}
 
@@ -64,7 +64,12 @@
 	<title>sickest game ever holyyy shitttt</title>
 </svelte:head>
 
-<svelte:window bind:innerWidth={width} bind:innerHeight={height} on:mousemove={move} />
+<svelte:window
+	bind:innerWidth={width}
+	bind:innerHeight={height}
+	on:pointermove={move}
+	on:pointerdown={move}
+/>
 
 <img
 	id="ragey"
